@@ -21,17 +21,15 @@ build:
 
 requirements:
   host:
-    - python >=3.7
-    - poetry-core
+    - python >=3.8
     - pip
   run:
-    - importlib_metadata >=4.0.0
-    - pygraphviz >=1.7.0,<2.0.0,!=1.8
-    - python >=3.7
+    - pygraphviz >=1.9
+    - python >=3.8
     - sqlalchemy >=1.4.0
   run_constrained:
     - flask-sqlalchemy >=2.5.1
-    - psycopg2 >=2.9.3,<3.0.0
+    - psycopg2 >=2.9.3
 
 test:
   source_files:
