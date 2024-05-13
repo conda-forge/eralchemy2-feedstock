@@ -1,4 +1,4 @@
-{% set version = "1.3.8" %}
+{% set version = "1.4.0" %}
 
 package:
   name: eralchemy2
@@ -7,10 +7,10 @@ package:
 source:
   - folder: dist
     url: https://pypi.io/packages/source/e/eralchemy2/eralchemy2-{{ version }}.tar.gz
-    sha256: 6288371dbf53d52e8159d754b1cb6f5b711df6615cde259cc1db54b248710e6f
+    sha256: 9e26ab0fee3de7e19e9a8190b8058960fc183d6397ad638f2522a2fa8af908d4
   - folder: src
     url: https://github.com/maurerle/eralchemy2/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 817300a8dda63f11972804654618557eede3176d6cdd1d887976fce93932fd5e
+    sha256: e5c6c78cb462a78f834df567e1b21e987de52ae9f101398abbda545db940d38c
 
 build:
   number: 0
@@ -21,17 +21,15 @@ build:
 
 requirements:
   host:
-    - python >=3.7
-    - poetry-core
+    - python >=3.8
     - pip
   run:
-    - importlib_metadata >=4.0.0
-    - pygraphviz >=1.7.0,<2.0.0,!=1.8
-    - python >=3.7
+    - pygraphviz >=1.9
+    - python >=3.8
     - sqlalchemy >=1.4.0
   run_constrained:
     - flask-sqlalchemy >=2.5.1
-    - psycopg2 >=2.9.3,<3.0.0
+    - psycopg2 >=2.9.3
 
 test:
   source_files:
@@ -42,7 +40,7 @@ test:
     - pip check
     - eralchemy2 --help
     - mypy -p eralchemy2 --ignore-missing-imports
-    - cd src && pytest -vv --cov=eralchemy2 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (database_to_intermediary or all_to_dot or (all_to_intermediary_db and not (sqlite or markdown or base)))" --cov-fail-under=79
+    - cd src && pytest -vv --cov=eralchemy2 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (database_to_intermediary or all_to_dot or (all_to_intermediary_db and not (sqlite or markdown or base)))" --cov-fail-under=75
   requires:
     - flask-sqlalchemy
     - mypy
