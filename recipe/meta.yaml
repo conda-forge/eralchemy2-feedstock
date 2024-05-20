@@ -34,13 +34,14 @@ requirements:
 test:
   source_files:
     - src/tests
+    - src/pyproject.toml
   imports:
     - eralchemy2
   commands:
     - pip check
     - eralchemy2 --help
     - mypy -p eralchemy2 --ignore-missing-imports
-    - cd src && pytest -vv --cov=eralchemy2 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (database_to_intermediary or all_to_dot or (all_to_intermediary_db and not (sqlite or markdown or base)))" --cov-fail-under=75
+    - cd src && pytest -vv --cov=eralchemy2 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -m "not external_db" --cov-fail-under=75
   requires:
     - flask-sqlalchemy
     - mypy
