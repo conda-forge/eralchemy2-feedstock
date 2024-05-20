@@ -1,4 +1,4 @@
-{% set version = "1.4.0" %}
+{% set version = "1.4.1" %}
 
 package:
   name: eralchemy2
@@ -7,10 +7,10 @@ package:
 source:
   - folder: dist
     url: https://pypi.io/packages/source/e/eralchemy2/eralchemy2-{{ version }}.tar.gz
-    sha256: 9e26ab0fee3de7e19e9a8190b8058960fc183d6397ad638f2522a2fa8af908d4
+    sha256: 1c1ee49b26287a459c5c89aa3eba3d6a9d1b8e6bd245d9fbacc6b15560fc66a5
   - folder: src
     url: https://github.com/maurerle/eralchemy2/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: e5c6c78cb462a78f834df567e1b21e987de52ae9f101398abbda545db940d38c
+    sha256: 7acbb46efe7dda418ac81d64fc69c346905d931b5751f1384dd358c71435b219
 
 build:
   number: 0
@@ -34,13 +34,14 @@ requirements:
 test:
   source_files:
     - src/tests
+    - src/pyproject.toml
   imports:
     - eralchemy2
   commands:
     - pip check
     - eralchemy2 --help
     - mypy -p eralchemy2 --ignore-missing-imports
-    - cd src && pytest -vv --cov=eralchemy2 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -k "not (database_to_intermediary or all_to_dot or (all_to_intermediary_db and not (sqlite or markdown or base)))" --cov-fail-under=75
+    - cd src && pytest -vv --cov=eralchemy2 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail -m "not external_db" --cov-fail-under=75
   requires:
     - flask-sqlalchemy
     - mypy
